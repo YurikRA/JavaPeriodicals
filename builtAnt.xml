@@ -1,0 +1,70 @@
+<project name="periodicals" basedir="H:\Java Project\Periodicals">
+
+    <property name="dist.dir" value="${basedir}\serverFile"/>
+    <property name="build.dir" value="${basedir}\build"/>
+    <property name="src.dir" value="${basedir}\src\ua"/>
+    <property name="tomcat.home" value="C:\java\apache-tomcat-8.5.38"/>
+
+    <path id="class.path">
+        <fileset dir="${basedir}\lib">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.home}/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="build">
+
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dir}\WEB-INF\classes"/>
+        <mkdir dir="${build.dir}\WEB-INF\lib"/>
+        <mkdir dir="${dist.dir}"/>
+
+        <echo message="Copying web content"/>
+        <copy todir="${build.dir}">
+            <fileset dir="${basedir}/web">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+
+        <echo message="Copying libraries"/>
+        <copy todir="${build.dir}\WEB-INF\lib">
+            <fileset dir="${basedir}\lib">
+                <include name="**/*.jar"/>
+            </fileset>
+        </copy>
+
+        <echo message="Compiling source code"/>
+        <javac classpathref="class.path" srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes"/>
+
+        <echo message="Copying application resources"/>
+        <copy todir="${build.dir}/WEB-INF/classes">
+            <fileset dir="${basedir}/src">
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="clean">
+        <echo message="Clean dir"/>
+
+        <delete file="${tomcat.home}/webapps/${ant.project.name}.war"/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="war" depends="clean, build">
+        <war destfile="${dist.dir}/${ant.project.name}.war" webxml="${build.dir}/WEB-INF/web.xml">
+            <fileset dir="${build.dir}"/>
+        </war>
+        <echo message="Copying file"/>
+        <copy todir="${tomcat.home}/webapps">
+            <fileset dir="${dist.dir}">
+                <include name="**/*.war"/>
+            </fileset>
+        </copy>
+    </target>
+
+</project>

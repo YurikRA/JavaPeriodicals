@@ -1,0 +1,12 @@
+<option value="1"><fmt:message key="month_jsp.january"/></option>
+<option value="2"><fmt:message key="month_jsp.february"/></option>
+<option value="3"><fmt:message key="month_jsp.march"/></option>
+<option value="4"><fmt:message key="month_jsp.april"/></option>
+<option value="5"><fmt:message key="month_jsp.may"/></option>
+<option value="6"><fmt:message key="month_jsp.june"/></option>
+<option value="7"><fmt:message key="month_jsp.july"/></option>
+<option value="8"><fmt:message key="month_jsp.august"/></option>
+<option value="9"><fmt:message key="month_jsp.september"/></option>
+<option value="10"><fmt:message key="month_jsp.october"/></option>
+<option value="11"><fmt:message key="month_jsp.november"/></option>
+<option value="12"><fmt:message key="month_jsp.december"/></option>

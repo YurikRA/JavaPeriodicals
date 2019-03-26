@@ -1,0 +1,12 @@
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
+<%--===========================================================================
+Footer (bottom area). 
+===========================================================================--%> 
+
+<tr>
+<td id="footer">&copy;
+	<fmt:message key="footer_jspf.all"/></td>
+</tr>
+

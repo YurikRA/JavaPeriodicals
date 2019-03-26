@@ -1,0 +1,62 @@
+<%@ page import="ua.ruban.db.Role" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+
+<tr>
+<td id="header">
+
+<c:if test="${not empty user}">
+
+<div id="leftHeader">
+
+	<c:choose>
+		<c:when test="${userRole.name == 'admin'}">
+			<a href="controller?command=listUsers"><fmt:message key="header_jsp.label.all_users"/></a> &emsp;
+			<a href="controller?command=listAllEditions"><fmt:message key="header_jsp.label.all_editions"/></a> &emsp;
+			<a href="controller?command=listCategory"><fmt:message key="header_jsp.label.all_category"/></a> &emsp;
+		</c:when>
+
+		<c:when test="${userRole.name == 'client'}">
+			<a href="controller?command=listCategory"><fmt:message key="header_jsp.label.all_category"/></a> &emsp;
+			<a href="controller?command=userSubscriptions"><fmt:message key="header_jsp.label.my_subscriptions"/></a> &emsp;
+			<a href="controller?command=userTopUpAccount"><fmt:message key="header_jsp.label.top_up_account"/></a> &emsp;
+		</c:when>
+	</c:choose>
+	<a href="controller?command=viewSettings"><fmt:message key="header_jsp.label.settings"/></a>
+</div>
+
+<div id="rightHeader" >
+
+	<c:out  value="${user.firstName} ${user.lastName}"/>
+
+		<c:if test="${not empty userRole}">
+    	   <c:choose>
+               	<c:when test="${userRole.name == 'client'}">
+               	    (<fmt:message key="header_jsp.label.client"/>).&emsp;
+               	    <fmt:message key="header_jsp.label.money"/>: ${user.money} $. &emsp;
+               	</c:when>
+                <c:when test="${userRole.name == 'admin'}">
+                    (<fmt:message key="header_jsp.label.admin"/>).&emsp;
+                </c:when>
+           </c:choose>
+    	</c:if>
+
+	<a href="controller?command=logout"><fmt:message key="header_jsp.label.log_out"/></a>
+</div>
+</c:if>
+
+<c:if test="${empty user and title ne 'Login'}">
+	<div id="rightHeader">
+		<a href="login.jsp"><fmt:message key="login_jsp.label.login"/></a>
+	</div>
+</c:if>
+
+<c:if test="${empty user and title ne 'Registration'}">
+	<div id="rightHeader">
+		<a href="controller?command=registration"><fmt:message key="registration_jsp.button.registration"/></a>
+	</div>
+</c:if>
+
+	</td>
+</tr>
+
